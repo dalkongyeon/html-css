@@ -1,0 +1,380 @@
+@charset "UTF-8";
+/* @font-face {
+    font-family: 'Wonchuri';
+    font-style: normal;
+    font-weight: 600;
+    src: url(../font/high1WonchuriTitleM.eot);
+    src: url(../font/high1WonchuriTitleM?#iefix) format('embedded-opentype'),
+         url(../font/high1WonchuriTitleM.woff) format('woff'),
+         url(../font/high1WonchuriTitleM.ttf) format('truetype');
+} */
+
+/* 반응형, 모바일에서 모든요소의 패딩,선을 크기안에 포함시킴(데스크탑 사용X) */
+/* *,:before,:after {box-sizing: border-box;} */
+
+/* body에 들어갈수있는 모든태그의 여백빼기 */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,address,code,em,img,strong,sub,sup,b,u,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figure,figcaption,footer,header,hgroup,menu,nav,section,main,audio,video {margin: 0; padding: 0;}
+
+/* html5추가 시멘틱엘리먼트를 익스하위버전에서 블럭으로 인식되도록함 */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,main {display: block}
+
+/* button태그에 손모양 커서 */
+button {cursor: pointer;}
+/* 익스하위버전에서 이미지 선없애기: fieldset이 들어가면 자동으로 선이 생김 */
+fieldset,img {border: 0; vertical-align: top}
+/* 리스트 기호 빼기 */
+ol,ul {list-style: none}
+/* 태그 기본 기울임꼴 제거 */
+address,em {font-style: normal}
+strong {font-weight: normal;}
+/* 페이지안에서 가장 많은 링크색 지정 */
+/* a의 컬러는 디자인에 따라 변경해야함 */
+/* tap-highlight-color: 모바일에서 tap할때 색상 */
+/* 색상 rbga 모드:rgba(0, 0, 0, 0.1) */
+/* 벤더프리픽스: 브라우저 제조사를 의미
+-webkit- 크롬, 사파리
+-ms- 익스
+-moz- (모질라) 파이어폭스
+아래 예시는 -webkit- 용이며 크롬과 사파리에 적용 */
+a { text-decoration: none; color: #333; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1); }
+/* iframe으로 외부컨텐츠를 연결했을때
+외부컨텐츠안쪽내용이 우리페이지에 영향을 주지못하도록 가려줌*/
+/* iframe {overflow: hidden; border: 0} */
+/* 칸의 선을 합치기, 칸의 간격없애기, 가로를 늘려줌 */
+table {border-collapse: collapse; border-spacing: 0; width: 100%}
+/* 굵기 빼고 헤딩태그 폰트크기를 body에 선언한 기본 크기와 일치시킴 */
+h1,h2,h3,h4,h5,h6 {font-weight: normal; font-size: 100%}
+/* 폼요소의 높이가 다를때 요소끼리 세로정렬시킴, ios 둥근모서리, 기본스타일 제거 */
+/* border-radius:0 -> iOS에서 테두리가 둥글게 나오므로 빼줌 */
+/* -webkit-appearance: none -> iOS에서 폼요소에 내부그림자가 나오므로 빼줌 */
+/* input: 입력창, textarea:여러줄 글씨 입력: 배송메모 */
+input, select, textarea, button { vertical-align: middle; margin: 0; padding: 0; border-radius: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1); } 
+
+/* textarea 리사이즈기능 빼기 */
+textarea {resize: none}
+/* 모바일 크롬, 사파리의 텍스트 자동확대 방지*/
+body { -webkit-text-size-adjust: none }
+
+
+
+
+
+/*********************** 공통스타일 *************************/
+/* body.on {overflow: hidden; height:100%;} */
+
+body,input,button,select,textarea,table {
+    /* 
+    사이트전체의 모든 영문에 영문전용폰트(Montserrat)적용
+    사이트전체의 모든 한글에 두번째의 한글폰트(Noto Sans KR)가 적용 됨
+    한줄에 한글과 영어가 섞여있을 경우 폰트가 달라지는 문제가 있음
+     */
+    font-family:'Noto Sans KR','맑은 고딕','malgun gothic','Apple SD Gothic Neo',sans-serif;
+    font-size: 16px;
+    color:#333;
+}
+
+/* Skip Navgation - 접근성 건너뛰기 메뉴 */
+#skip_navi {position: relative;}
+#skip_navi a { position: absolute; left: 0; top: -999px; width: 100%; padding: 10px 0; background: #fff; z-index: 99999; text-align: center }
+/* 아래 #skip_navi a:active, #skip_navi a:focus 둘은 크롬과 상관X */
+#skip_navi a:hover, #skip_navi a:active, #skip_navi a:focus {top:0}
+
+/* IR:대체 텍스트기법 (image replacement:이미지 대체 기법)- img alt 속성으로 이미지 설명넣기
+/* legend,caption,메뉴제목,섹션제목 블라인드 */
+/* legend: 폼에 대한 제목, 보이지 않게 블라인드 처리함 */
+/* caption: 테이블에 대한 제목, 블라인드 처리함
+그외 text등을 보이지 않게 할 경우 .blind 공동클래스 사용 */
+
+/* 태그자체를 보이지 않게 할 경우 .blind사용
+버튼안의 텍스트만 보이지 않게 할 경우 text-indent:-9999px */
+
+/* legend. caption, blind : 메뉴제목, 섹션제목, 블라인드 */
+legend,
+caption,
+.blind {
+    /* 주변내용에 영향을 주지 않도록 띄움(레이어) */
+    position: absolute;
+    /* 넘치는 부분을 가려줌 */
+    border: 5px solid red;
+    overflow: hidden;
+    /* clip= ps, pp의 crop기능과 동일, 완전히 보이지 않게 함 */
+    clip: rect(0 0 0 0);
+    /* 원래의 위치로 이동 */
+    margin: -1px;
+    /* 0으로 할수 없음(스크린리더에서 0px은 읽지 않으므로 최소크기지정) */
+    width: 1px;
+    height: 1px
+}
+
+/* float해제 */
+.clearfix:after { content: ''; display: block; clear: both; }
+
+/* placeholder */
+::-webkit-input-placeholder {color:#bbbbbb;} /* Webkit,크롬,사파리 */
+:-moz-placeholder {color:#bbbbbb;} /* Firefox 4-18 */
+::-moz-placeholder {color:#bbbbbb; opacity:1;} /* Firefox 19+ */
+:-ms-input-placeholder {color:#bbbbbb !important;} /* IE10+ */
+
+/* 텍스트 선택 컬러 */
+/* 드래그로 텍스트 선택했을 때 컬러 */
+::selection { background: #ef151e;color: #ffffff; }
+
+/* 폼요소 공통 */
+/* IE x버튼, password 눈모양 가리기 */
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+}
+
+/* 체크박스 공통 */
+.checkbox_wrap {display: inline-block;}
+input[type="checkbox"] + label {cursor: pointer; display: inline-block; color: #292929;}
+input[type="checkbox"] + label:before {
+    content: '';
+    display: inline-block;
+    width:26px;
+    height: 26px;
+    border-radius: 50%;
+    border:2px solid #dddddd;
+    vertical-align: -8px;
+    margin-right: 10px;
+}
+input[type="checkbox"]:checked + label:before { background: url(../images/icon_checkbox.png) no-repeat 50% 50%; background-size: 18px; }
+
+/* 라디오 공통 */
+.radio_wrap {display: inline-block;}
+input[type="radio"] + label { cursor: pointer; display: inline-block; color: #292929; position: relative; }
+input[type="radio"] + label:before {
+    content: '';
+    display: inline-block;
+    width:26px;
+    height: 26px;
+    border:2px solid #dddddd;
+    border-radius: 50%;
+    vertical-align: -8px;
+    margin-right: 10px;
+}
+input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    left:9px;
+    top:9px;
+    width:12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #009223;
+}
+
+
+/* select 공통 */
+.select_wrap {display: inline-block; width:196px; border:2px solid #dddddd; margin-left:6px; position: relative;}
+.select_wrap:after {content: ''; position: absolute; right:15px; top:50%; margin-top:-3px; width:12px; height:7px; background: url(../images/icon_select_arr.png) no-repeat;}
+.select_wrap select {width:100%; height: 41px; border:none; outline: none; color:#999999; padding-left: 15px; position: relative; z-index: 10; background: none;}
+
+/* 화살표제거 */
+select {
+    -webkit-appearance: none; /* 크롬,사파리 */
+    -moz-appearance: none; /* 파폭 */
+    appearance: none;
+}
+/* 익스 화살표 제거 */
+select::-ms-expand { display: none; }
+
+
+
+
+
+
+
+/* textarea 공통 */
+textarea {background:#f8f8f8; width:100%; border:none; padding: 15px; outline: none; box-sizing: border-box;} 
+
+/* 파일선택 공통 */
+.file_wrap {
+    width: 466px;
+    border: 2px solid #dddddd;
+    display: inline-block;
+    position: relative;
+    padding-right: 98px;
+    box-sizing: border-box;
+}
+.file_wrap input[type="text"] {
+    height: 40px !important;
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    padding:0 13px !important;
+    background: none !important;
+}
+.file_wrap label {
+    width: 98px;
+    height: 100%;
+    position: absolute;
+    right:0;
+    top:0;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.file_wrap label:before {
+    content: '';
+    position: absolute;
+    left:0;
+    top:50%;
+    margin-top: -8px;
+    width:2px;
+    height: 16px;
+    background: #e8e8e8;
+}
+
+
+/* 버튼 공통 */
+.btn {
+    display: inline-block;
+    padding: 7px 15px;
+    text-align: center;
+    font-size: 15px;
+    background: transparent;
+    box-sizing: border-box;
+    border:1px solid #7e7e7e;
+}
+
+/* 버튼 테두리 */
+.btn_border { border:2px solid #009223; color:#009223; }
+
+/* 버튼 배경색 */
+.btn_bg_point01 { border:2px solid #009223; background: #009223; color:#fff; }
+
+/* 등록하기 버튼 */
+.btn_regist:after { content: ''; display: inline-block; width:21px; height: 16px; background: url(../images/icon_reg.png) no-repeat; margin-left: 5px; }
+
+
+
+
+
+/* 글자색 공통 */
+.txt_point01 {color:#009223;}
+
+/* 게시판 테이블 공통 */
+.tbl_board_area {margin-top: 60px;}
+.tbl_board_area h3 { font-size: 26px; margin-bottom: 20px; }
+.tbl_board_area .tbl_board_wrap { border-top: 1px solid #000; }
+.tbl_board_area .tbl_board_wrap table { table-layout: fixed; }
+.tbl_board_area .tbl_board_wrap th { border-bottom:1px solid #eee; height: 60px; background: #f5f5f5; font-weight: normal; font-size: 16px; }
+.tbl_board_area .tbl_board_wrap .th01 { width:9%; }
+.tbl_board_area .tbl_board_wrap .th03 { width:15%; }
+.tbl_board_area .tbl_board_wrap td { border-bottom:1px solid #eee; height: 60px; font-size: 16px; text-align: center; }
+.tbl_board_area .tbl_board_wrap td.left_td {text-align: left;}
+.tbl_board_area .tbl_board_wrap td.left_td a {
+    /* a는 인라인이어서 크기가 안잡히므로 인라인블럭으로 내용만큼의 크기를
+    갖게한후 최대크기를 칸의 길이만큼으로 제한 */
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tbl_board_area .pagination_wrap { margin-top: 20px; text-align: center; }
+.tbl_board_area .pagination { display: inline-block; }
+.tbl_board_area .pagination .btn_page { float: left; width:22px; height: 40px; text-indent: -9999px; position: relative; }
+.tbl_board_area .pagination .btn_page:before {
+    content: '';
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin: -7px 0 0 -7px;
+    width:14px;
+    height: 14px;
+    background: url(../images/sprite_pc.png) no-repeat;
+    background-position: -397px -310px;
+}
+.tbl_board_area .pagination .btn_page.prev:before { background-position:-369px -182px; width:7px; margin-left: -4px; }
+.tbl_board_area .pagination .btn_page.next:before { background-position:-30px -431px; width:7px; margin-left: -4px; }
+.tbl_board_area .pagination .btn_page.last:before { background-position:-443px -388px; }
+.tbl_board_area .pagination .btn_page.prev { margin-right: 8px; }
+.tbl_board_area .pagination .btn_page.next { margin-left: 8px; }
+.tbl_board_area .pagination .num { float: left; width: 40px; height: 40px; border:1px solid #eee; box-sizing: border-box; line-height: 40px; margin: 0 5px; }
+.tbl_board_area .pagination .num.active { background: #bb0841; color:#fff; border-color: #bb0841; }
+
+/* 요금표 공통 */
+.tbl_fee_area {margin-top: 50px;}
+.tbl_fee_area .txt_top { font-size: 18px; }
+.tbl_fee_area .tit_fee {overflow: hidden; margin-top: 30px;}
+.tbl_fee_area .tit_fee h3 { float: left; font-size: 30px; font-family: 'Wonchuri',sans-serif; color:#333; position: relative; padding-top: 15px; }
+.tbl_fee_area .tit_fee h3:before { content: ''; position: absolute; left:0; top:0; width:80px; height: 3px; background: #000; }
+.tbl_fee_area .tit_fee a { float: right; margin-top: 20px; }
+
+.tbl_fee_area .warning { margin-top: 10px; }
+.tbl_fee_area .warning i { font-size: 20px; vertical-align: -3px; margin-right: 3px; }
+
+
+/* 요금표 테이블 공통 */
+.tbl_fee_wrap {border-top:2px solid #333; margin-top: 15px;}
+.tbl_fee_wrap th { border:1px solid #d9d9d9; border-top:none; }
+.tbl_fee_wrap thead th { height: 70px; font-size: 18px; color:#333; background: #f7f7f7; }
+.tbl_fee_wrap tbody th { background: #f7f7f7; padding:0 30px; font-size: 16px; }
+.tbl_fee_wrap td { border:1px solid #d9d9d9; border-top:none; height: 58px; text-align: center; padding:0 30px; }
+.tbl_fee_wrap td.td_right { text-align: right; }
+
+/* 다운로드 버튼 공통 */
+.btn_download { display: inline-block; padding: 7px 3px; }
+.btn_download:hover {border-bottom: 1px solid #000;}
+.btn_download [class^=icon_download] {
+    display: inline-block;
+    width:20px;
+    height: 20px;
+    background: url(../images/sprite_pc_new.png) no-repeat;
+    text-indent: -9999px;
+}
+.btn_download .icon_download_pdf { background-position-x: -125px; }
+.btn_download .icon_download_ppt { background-position-x: -50px; }
+.btn_download .icon_download_xls { background-position-x: -100px; }
+
+
+
+
+
+#wrap {
+    width: 1200px
+}
+
+.footer_quick {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.footer_quick .box li {
+  float: left;
+  width: 340px;
+  height: 100px;
+  padding: 30px ;
+  font-size: 14px;
+
+}
+
+.footer_quick .box li a {
+  /* display:block; */
+  /* padding: 30px; */
+}
+
+/* .footer_quick .box h3 {
+  font-size: ;
+} */
+
+.footer_quick .box li p {
+  margin-top: 5px;
+  font-style: 14px;
+  color: #ffffff;
+  display: block;
+}
+
+.footer_quick .box li:first-child {
+  background:#907354 url(../images/speed_menu_icon_02.png) no-repeat right 80px bottom 50px;
+}
+.footer_quick .box li:nth-child(2) {
+  background:#434343 url(../images/speed_menu_icon_03.png) no-repeat right 80px bottom 50px;
+}
+.footer_quick .box li:nth-child(3) {
+  background:#c30606 url(../images/speed_menu_icon_04.png) no-repeat right 80px bottom 50px;
+}
