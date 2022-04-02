@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=1200px">
-	<title>아웃백 푸터 퀵메뉴</title>
-	<link rel="stylesheet" href="css/common.css">
-</head>
-<body>
-	<div id="skip_navi">
-		<a href="#container">본문바로가기</a>
-	</div>
-	<section>
-		
-	</section>
-		<div id="wrap">
-			<footer id="footer">
-				<section class="footer_quick">
-					<ul class="box">
-						<li>
-							<a href="menu">
-								<img src="images/reserve.png" alt="reserve">
-							</a>
-							<p class="txt">예약하기</p>
-						</li>
-						<li>
-							<a href="menu">
-								<img src="images/save_point.png" alt="point">
-							</a>
-							<p class="txt">사후 적립</p>
-						</li>
-						<li>
-							<a href="menu">
-								<img src="images/delivery.png" alt="delivery">
-							</a>
-							<p class="txt">딜리버리 전화주문<br>1811-3650</p>
-						</li>
-					</ul>
-				</section>
-			</footer>
-		</div>
-</body>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=1200px"/>
+    <title>절대상대서버경로</title>
+  </head>
+  <body>
+    <!-- 상대경로: 현재파일을 기준으로 연결할 파일의 경로를 잡는 방식 -->
+    <!-- 알트속성에 이미지에 대한 설명을 입력 -->
+    <!-- 제목태그안에 img는 설명을 넣어야함, a태그안의 img에도 설명 넣기 -->
+    <!-- ./는 현재폴더이며 생략가능, ../는 상위폴더, 폴더명/는 하위폴더 -->
+    <img src="images/img_goodrich.png" alt="굿리치"/>
+
+    <!-- 서버경로: 서버상의 루트를 기준으로 해당파일의 위치를 알려줌 -->
+    <!-- 퍼블작업시는 상대경로로 작업하여 백엔드로 전달하면 백엔드에서 필요에따라 서버경로로 변경함 -->
+    <img src="/images/img_goodrich.png" alt="굿리치"/>
+
+    <!-- 절대경로: 다른서버에 있는 파일을 연결할 때 -->
+    <img src="http://ossamuiux.com/test/images/logo.png" alt="금호전기"/>
+
+    <a href="ceo.html">ceo</a>
+    <!-- a태그에서는 속성(href)를 생략하면 안됨 -->
+    <!-- #은 현재페이지 의미 -->
+    <!-- 연결파일이 없거나 스크립트 실행 용도일 경우 -->
+    <a href="#">임시링크</a>
+    <!-- 외부링크(타겟속성 입력으로 새창으로 열기를 해야 편함), 패밀리사이트 -->
+    <!-- 외부링크시 target="_blank" title="새창 열림" 넣어서 새창으로 띄우고 알림표시해야함 -->
+    <a href="http://ossamuiux.com" target="_blank" title="새창 열림">다른사이트 연결</a>
+    <!-- < > 는 html대그로 인식하여 오류로 표시되므로 html특수문자기호를 사용해야함/ (&lt:<)(&gt:>),(&amp:&)(&nbsp; :공백) -->
+    <!-- &는 url문자열에 포함되는 기호이므로 특문으로 입력해줌 -->
+      <p>&lt;특수&amp;문자&gt;</p>
+      <!-- 공백문자가 있지만 사용하지 않음 -->
+      <p>공백&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;문자</p>
+  </body>
 </html>
